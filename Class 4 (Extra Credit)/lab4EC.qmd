@@ -1,0 +1,43 @@
+---
+title: "lab 4 extra credit"
+author: "Zainab Fatima"
+format: pdf
+---
+
+```{r}
+source("http://thegrantlab.org/misc/cdc.R")
+
+# Create height_m
+height_m <- cdc$height * 0.0254
+
+#Create weight_kg
+weight_kg <- cdc$weight * 0.454
+
+BMI <- (weight_kg)/(height_m^2)
+
+sum(BMI >= 30)
+```
+
+```{r}
+#Q9 Use bracket notation to make a scatterplot of height and weight for first 100 respondents
+
+plot( x= cdc[1:100, "weight"], y = cdc[1:100, "height"], 
+     xlab = "Weight", 
+     ylab = "Height", 
+     main = "Height vs. Weight for First 100 Respondents")
+```
+
+```{r}
+#Q10
+height_m <- cdc$height * 0.0254
+weight_kg <- cdc$weight * 0.454
+BMI <- (weight_kg)/(height_m^2)
+
+cdc$bmi <- (cdc$weight * 0.454)/(cdc$height * 0.0254)^2
+obese <- cdc[cdc$bmi >= 30, ]
+gender <- table(obese$gender)
+gender <- table(obese$gender)
+gender["m"]
+```
+
+
