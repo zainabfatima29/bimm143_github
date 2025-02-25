@@ -1,0 +1,348 @@
+---
+title: "Class 10: Structural Bioinformatics Part 1"
+author: "Zainab Fatima (A16880407)"
+date: "2-6-25"
+format: pdf
+toc: true
+---
+
+## The PDB Database
+
+The main repository of biomolecular structure data is called the PDB found at: https://www.rcsb.org/
+
+Let's see what this database contains. I went to PDB > Analyze > PDB Statistics > By Exp method and molecular type. 
+
+```{r}
+pdbstats <- read.csv("Data Export Summary.csv")
+pdbstats
+```
+
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+The answer is that around 83% are solved by X-ray and 11% is solved by RM. The code is listed below. 
+
+```{r}
+pdbstats$X.ray
+#output has quotes around them because they're characters, can't do math with them
+```
+The comma in these numbers is causing them to be read as characters rather than numberic. 
+
+You can fix this by replacing "," for nothing "" with the `sub()` function: 
+
+```{r}
+x <- pdbstats$X.ray
+#as.numeric(sub(",", "", x)) gets rid of comma 
+#could then sum it and get total number of x-ray
+sum(as.numeric(sub(",", "", x)))
+```
+Or I can use the **readr** package and the `read_csv()` function. 
+
+```{r}
+library(readr)
+pdbstats <- read_csv("Data Export Summary.csv")
+#this read csv has a _
+pdbstats
+```
+
+I want to clean the column names so that they are lowercase and don't have spaces in them. 
+
+```{r}
+colnames(pdbstats)
+```
+```{r}
+library(janitor)
+
+df <- clean_names(pdbstats)
+df
+```
+
+Total number of X-ray structures
+```{r}
+sum(df$x_ray)
+```
+Total number of structures
+```{r}
+sum(df$total)
+```
+The percentage of Xray structures
+
+```{r}
+percent_xray <- (sum(df$x_ray)/sum(df$total))*100
+percent_xray
+```
+The percentage of EM structures
+```{r}
+percent_em <- sum(df$em)/sum(df$total) * 100
+percent_em
+```
+
+> Q2: What proportion of structures in the PDB are protein?
+
+The answer is 0.86238. The code is below:
+
+```{r}
+library(dplyr)
+library(janitor)
+df <- clean_names(pdbstats)
+
+protein_only_total <- df %>%
+  filter(molecular_type == "Protein (only)") %>%
+  pull(total)
+
+protein_only_total
+```
+```{r}
+# find the proportion of protein (only) over total
+
+prop_protein_only <- protein_only_total/ sum(df$total)
+
+prop_protein_only
+```
+
+
+> Q3: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+231,029 HIV protease-1 structures are in the current PDB. 
+
+## Using Mol*
+
+The main Mol* homepage at: https://molstar.org/viewer/
+We can input our own PDB files or just give it a PDB database accession code (4 letter PDB code). 
+
+
+![Molecular View of 1HSG](1HSG.png)
+> Q4: Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+In this structure, the water molecules are represented with just the oxygen or O atom. This is because hydrogen atoms have less electron density and thurs are often not resolved in methods that determine protein structures. They can also be omitted for clarity. 
+
+> Q5. Identify the critical area where water interacts with molecule
+
+Residue #308 is where water interacts with the molecule. 
+
+![Ligand Interactions with H2O](1HSGb.png)
+
+
+
+![Close-up of Ligand Interactions with Water](1HSGc.png)
+
+
+
+
+![Surface Representation of Ligand - Polymer Interaction](1HSGd.png)
+
+> Q6: Generate and save a figure clearly showing the two distinct chains of HIV-protease along with the ligand. You might also consider showing the catalytic residues ASP 25 in each chain and the critical water (we recommend “Ball & Stick” for these side-chains). Add this figure to your Quarto document.
+
+![The important Asp25 amino acids](1HSGf.png) 
+
+## Introduction to Bio3D in R
+
+We can use the **bio3d** package for structural bioinformatics to read PDb data into R
+
+```{r}
+library(bio3d)
+pdb <- read.pdb("1hsg")
+pdb
+```
+
+> Q7. How many amino acid residues are there in this pdb object? 
+
+```{r}
+length(pdbseq(pdb))
+```
+198 residues
+
+> Q8: Name one of the two non-protein residues? 
+
+HOH or MK1 
+
+> Q9: How many protein chains are in this structure?
+
+2 chains (chains A and B)
+
+Looking at the `pdb` object in more detail
+
+```{r}
+attributes(pdb)
+```
+```{r}
+head(pdb$atom)
+```
+
+Let's try a new function not yet in the bio3d package:
+
+```{r}
+library(r3dmol)
+source("https://tinyurl.com/viewpdb")
+#view.pdb(pdb, backgroundColor ="pink")  
+```
+
+## Predicting Functional Dynamics
+
+We can use the `nma()` function in bio3d to predict the large-scale functional motions of biomolecules. 
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+```{r}
+m <- nma(adk)
+plot(m)
+```
+Write out a trajectory of the predicted molecuar motion:
+```{r}
+mktrj(m, file = "adk_m7.pdb")
+```
+
+
+## Comparative Structure Analysis of Adenylate Kinase
+
+The goal of this section is to do a principal component analysis (PCA) on the complete collection of adenylate kinase structures in the PDB. 
+
+Starting from one Adk PDB identifier (PDB ID: 1AKE) we will search the entire PDB for related structures using BLAST, fetch, align, and superpose the identified structures, perform PCA, and calculate the normal modes of each individual structure to find potential differences in structural flexibility. 
+
+```{r}
+#install.packages("bio3d")
+#install.packages("devtools")
+#install.packages("BiocManager")
+
+BiocManager::install("msa")
+```
+
+```{r}
+devtools::install_bitbucket("Grantlab/bio3d-view")
+```
+> Q10. Which of the packages above is found only on BioConductor and not CRAN? 
+
+`msa` (Multiple Sequence Alignment) is found only on Bioconductor and not CRAN.
+
+> Q11. Which of the above packages is not found on BioConductor or CRAN?
+
+`bio3d-view` is not found on either BioConductor or CRAN, it is installed from Bitbucket.
+
+> Q12. True or False? Functions from the devtools package can be used to install packages from GitHub and BitBucket?
+
+True. The `devtools1 package provides functions such as install_github() for installing packages from GitHub and install_bitbucket() for installing packages from BitBucket.
+
+```{r}
+library(bio3d)
+aa <- get.seq("1ake_A")
+```
+```{r}
+aa
+```
+> Q13. How many amino acids are in this sequence, i.e. how long is this sequence? 
+
+There are 214 amino acids in this sequence. 
+
+We can use this sequence as a quert to BLAST search the PDB to find similar sequences and structures. 
+
+```{r}
+# Blast or hmmer search
+#b <- blast.pdb(aa)
+```
+```{r}
+# Plot a summary of search results
+
+#hits <- plot(b)
+```
+
+```{r}
+# List out some 'top hits'
+#head(hits$pdb.id)
+```
+```{r}
+# BLAST timed out, used vector of PDB IDs
+
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','6S36_A','6RZE_A','3HPR_A','1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A','4K46_A','3GMT_A','4PZL_A')
+```
+
+```{r}
+# Download releated PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+Next we will use the `psbaln()` function to align and optionally fit the identified PDB structures. 
+
+```{r}
+# Align releated PDBs
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+```
+```{r}
+# Vector containing PDB codes for figure axis
+ids <- basename.pdb(pdbs$id)
+
+# Draw schematic alignment
+#plot(pdbs, labels=ids)
+```
+
+![](sequencealignclass10.png)
+
+
+The above figure shows the schematic representation of the alignment. The gray reigons show the aligned residues, and the white reigons show gap regions. The red bar shows sequences conservation. 
+
+The function `pdb.annotate()` provides a convenient way of annotating the PDB files we collected. We will use the function to annotate each structure to its source species. 
+
+```{r}
+anno <- pdb.annotate(ids)
+unique(anno$source)
+```
+We can view all avaliable annotation data
+
+```{r}
+anno
+```
+
+We can then perform a PCA on the structural ensemmble (stored in the pdbs object). 
+
+```{r}
+pc.xray <- pca(pdbs)
+plot(pc.xray)
+```
+
+This figure is the results of the PCA on adenylate kinase X-ray structures. Each dot represents one PDB structure. 
+
+```{r}
+#Calculate RMSD 
+rd <- rmsd(pdbs)
+
+#Structure-based clustering 
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k = 3)
+
+plot(pc.xray, 1:2, col = "grey50", bg = grps.rd, pch = 21, cex = 1)
+```
+This figure is the projection of the adenylate kinase X-ray structures. Each dot represents one PDB structure. 
+
+We can plot our main PCA results with ggplot:
+
+```{r}
+#Plotting results with ggplot2
+library(ggplot2)
+library(ggrepel)
+
+df <- data.frame(PC1=pc.xray$z[,1], 
+                 PC2=pc.xray$z[,2], 
+                 col=as.factor(grps.rd),
+                 ids=ids)
+
+p <- ggplot(df) + 
+  aes(PC1, PC2, col=col, label=ids) +
+  geom_point(size=2) +
+  geom_text_repel(max.overlaps = 20) +
+  theme(legend.position = "none")
+p
+```
+
+## Normal Mode Analysis (optional)
+
+```{r}
+#NMA of all structures 
+modes <- nma(pdbs)
+
+plot(modes, pdbs, col = grps.rd)
+```
+
+> Q14. What do you note about this plot? Are the black and colored lines similar or different? Where do you think they differ most and why?
+
+The black lines are different from the colored lines. They differ the most near #30 - #60 residue and #120 to #160 residue. The differences show 2 distinct confrontational states for Adk. They differ by displacement of 2 nucleotide-binding site reigons that have distinct flexibilities once the nucleotide  

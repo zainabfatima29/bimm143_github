@@ -1,0 +1,68 @@
+---
+title: "Class 10 Section 4: Comparative Structure Analysis"
+author: "Zainab Fatima (PID: A16880407)"
+format: pdf
+date: "2-11-25"
+toc: TRUE
+---
+
+
+
+Here we run through a complete "pipeline" of structure analysis that begins with a single sequence identifier and ends in a PCA analysis. 
+
+
+
+```{r}
+library(bio3d)
+```
+
+
+
+## Step 1. Get Protein Seqeucnce
+
+Retrieve a sequence for the protein we are interested in. We will take ADK "1ake_A"
+
+
+
+```{r}
+id <- "1ake_A" 
+aa <-get.seq(id)
+aa
+```
+
+
+
+## Step 2. BLAST search
+
+Run a BLAST search of the PDB for all related sequences to our input `aa`
+
+
+
+```{r}
+blast <- blast.pdb(aa)
+```
+
+```{r}
+#blast$hit.tbl shows table of results
+
+hits <- plot(blast)
+#hits has details of top hits
+```
+
+
+
+## Step 3: Donwload structures 
+
+These are our "top hits" i.e. all structures in the PDB database related to our input sequence. 
+
+
+
+```{r}
+hits$pdb.id
+```
+
+```{r}
+# Download releated PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
