@@ -1,0 +1,43 @@
+---
+title: "Class 6 Homework"
+author: "Zainab Fatima (PID: A16880407)"
+format: pdf
+---
+```{r}
+
+#The new function (for processing and plotting B-factor vs residue)
+
+library(bio3d)
+graph_pdb <- function (pdb){
+  pbd_file <- read.pdb(pdb)
+  trimmed_file.chainA <- trim.pdb(pbd_file, chain="A", elety="CA")
+  pdb_b <- trimmed_file.chainA$atom$b
+  plotb3(pdb_b, sse= trimmed_file.chainA, typ="l", ylab="Bfactor")
+}
+
+# The function graph_pdb takes PDB ID of a protein-drug interaction as input. 
+
+# The new function graph_pdb() graphs the B-factor in a protein vs residue. 
+
+#In the function, read.pdb is used to read a protein data bank file (PDB) with a given PDB 
+#Trim.pdb is used to keep only the atoms in chain A and the carbon alpha atoms
+#$atom$b extracts the B-factors
+#Plotb3() is used to plot the B-factors in a line plot. 
+
+# The output is the graph of the B-factor vs residue graph of each PDB ID. 
+
+```
+
+```{r}
+#For plotting the B-factor vs residue for any set of IDs:
+#we can use sapply() to create the graphs for multiple IDs at once. 
+
+pdb_ids <- c("4AKE", "1AKE", "1E4Y")
+graphs <- sapply(pdb_ids, graph_pdb)
+```
+
+
+
+
+
+
