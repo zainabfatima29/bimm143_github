@@ -1,4 +1,4 @@
-# BIMM143 Portfolio
+# BIMM143 (Bioinformatics) Portfolio
 
 My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_W25/) at UC San Diego
 
@@ -14,13 +14,13 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 08 [Unsupervised learning mini-project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%208/class8miniproj.html)
 
-- Class 09
+- Class 09 [Mini-Project: Unsupervised clustering and Principal Component Analysis]()
 
-- Class 10
+- Class 10 [Structural Bioinformatics Part 1: AlphaFold and Protein Structure, Visualization, and Dynamics]()
 
-- Class 11
+- Class 11 [Structural Bioinformatics Part 2: AlphaFold2 and Protein Structure Prediction]()
 
-- Class 12
+- Class 12 [Genome Informatics: Sample Galaxy RNA-Seq workflow with FastQC and Bowtie2]()
 
 - Class 13
 
