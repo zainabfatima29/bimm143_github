@@ -22,15 +22,14 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 12 [Genome Informatics: Sample Galaxy RNA-Seq workflow with FastQC and Bowtie2]()
 
-- Class 13
+- Class 13 [Transcriptomics and RNA-Seq Data Analysis]()
 
-- Class 14
+- Class 14 [Mini project: RNA-Seq Data Analysis]()
 
-- Class 15
+- Class 16 [UNIX for Bioinformatics]()
 
-- Class 17
+- Class 17 [Analyzing Sequencing Data on the Cloud]()
 
-- Class 18
+- Class 18 [Mini Project: Web-scraping, JSON based APIs, Longitudingal RNA-Seq Analysis]()
 
-- Class 19
-- C
+- Class 19 [Mini-project: Cancer Mutation Analysis from Next-Gen Sequencing Data]()
