@@ -8,7 +8,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 05 [Data Visualization with ggplot](https://htmlpreview.github.io/?)
 
-- Class 06 [Rfunctions](https://htmlpreview.github.io/?)
+- Class 06 [Rfunctions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%206/Class06.html)
 
 - Class 07 [Introduction to machine learning for Bioinformatics 1](https://htmlpreview.github.io/?)
 
