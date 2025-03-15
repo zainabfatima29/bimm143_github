@@ -20,8 +20,6 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 11 [Structural Bioinformatics Part 2: AlphaFold2 and Protein Structure Prediction]()
 
-- Class 12 [Genome Informatics: Sample Galaxy RNA-Seq workflow with FastQC and Bowtie2]()
-
 - Class 13 [Transcriptomics and RNA-Seq Data Analysis]()
 
 - Class 14 [Mini project: RNA-Seq Data Analysis]()
