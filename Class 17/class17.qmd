@@ -1,0 +1,129 @@
+---
+title: "Class 17 Lab: Analyzing sequencing data in the cloud"
+author: "Zainab Fatima (PID: A16880407)"
+date: "03-08-2025"
+format: html
+toc: TRUE
+---
+
+Instance ID 
+
+<--- i-05180c9de5060cffb (bimm143_zainab) --->
+
+Open an SSH client.
+
+Locate your private key file. The key used to launch this instance is bioinf_zainab.pem
+
+Run this command, if necessary, to ensure your key is not publicly viewable.
+chmod 400 "bioinf_zainab.pem"
+
+Connect to your instance using its Public DNS:
+ec2-34-220-203-193.us-west-2.compute.amazonaws.com
+
+## Downstream Analysis
+
+```{r}
+library(tximport)
+
+# setup the folder and filenames to read
+folders <- dir(pattern="SRR21568*")
+samples <- sub("_quant", "", folders)
+files <- file.path( folders, "abundance.h5" )
+names(files) <- samples
+
+txi.kallisto <- tximport(files, type = "kallisto", txOut = TRUE)
+```
+We can calculate our estimated transcript counts for each sample in R.
+
+```{r}
+head(txi.kallisto$counts)
+```
+Now, we can try to see how many transcripts we have for each sample:
+
+```{r}
+colSums(txi.kallisto$counts)
+```
+
+How many transcripts are detected in at least one sample: 
+
+```{r}
+sum(rowSums(txi.kallisto$counts)>0)
+```
+
+We need to filter out those annotated transcripts with no reads before we more onto more downstream analysis. 
+
+```{r}
+to.keep <- rowSums(txi.kallisto$counts) > 0
+kset.nonzero <- txi.kallisto$counts[to.keep,]
+```
+
+Let's also remove those with no change over the samples:
+```{r}
+keep2 <- apply(kset.nonzero,1,sd)>0
+x <- kset.nonzero[keep2,]
+```
+
+## Principal Component Analysis
+
+We can do PCA of the transcriptomic profiles of the samples. In the principal components, we can scale each transcript's measured levels so they contribute equally to the PCA.
+
+```{r}
+pca <- prcomp (t(x), scale = TRUE)
+```
+
+```{r}
+summary (pca)
+```
+
+```{r}
+plot(pca$x[,1], pca$x[,2],
+     col=c("blue","blue","red","red"),
+     xlab="PC1", ylab="PC2", pch=16)
+```
+
+
+
+> Q. Use ggplot to make a figure of P1 vs PC2, PC 1 vs PC 3, and PC 2 vs PC 3. 
+
+```{r}
+library (ggplot2)
+library (ggrepel)
+```
+
+```{r}
+# Make a metadata object for the samples
+colData <- data.frame(condition = factor(rep(c("control", "treatment"), each = 2)))
+rownames(colData) <- colnames(txi.kallisto$counts)
+```
+
+```{r}
+#Make the data.frame for ggplot
+y <- as.data.frame(pca$x)
+y$condition <- as.factor(colData$condition)
+```
+
+```{r}
+#PC 1 vs PC 2
+ggplot(y) +
+  aes(PC1, PC2, col=condition) +
+  geom_point() +
+  geom_text_repel(label=rownames(y)) +
+  theme_bw()
+```
+```{r}
+#PC 1 vs PC 3
+ggplot(y) +
+  aes(PC1, PC3, col=condition) +
+  geom_point() +
+  geom_text_repel(label=rownames(y)) +
+  theme_bw()
+```
+```{r}
+#PC 2 vs PC 3
+ggplot(y) +
+  aes(PC2, PC3, col=condition) +
+  geom_point() +
+  geom_text_repel(label=rownames(y)) +
+  theme_bw()
+```
+
