@@ -20,7 +20,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 11 [Structural Bioinformatics Part 2: AlphaFold2 and Protein Structure Prediction]()
 
-- Class 13 [Transcriptomics and RNA-Seq Data Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2013/class13.html)
+- Class 13 [Transcriptomics and RNA-Seq Data Analysis](https://htmlpreview.github.io/?)
 
 - Class 14 [Mini project: RNA-Seq Data Analysis]()
 
