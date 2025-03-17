@@ -3,8 +3,6 @@
 My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_W25/) at UC San Diego
 
 - Class04 [Introduction to R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%204/class4jan16th.html) 
-  
-- Class04 [Extra Credit](https://htmlpreview.github.io/?)
 
 - Class 05 [Data Visualization with ggplot](https://htmlpreview.github.io/?)
 
@@ -22,7 +20,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 13 [Transcriptomics and RNA-Seq Data Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2013/class13.html)
 
-- Class 14 [Mini project: RNA-Seq Data Analysis]()
+- Class 14 [Mini project: RNA-Seq Data Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2014/Class%2014%20Lab.html)
 
 - Class 16 [UNIX for Bioinformatics]()
 
