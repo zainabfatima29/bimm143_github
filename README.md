@@ -1,5 +1,5 @@
 # BIMM143 (Bioinformatics) Portfolio
-
+ 
 My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_W25/) at UC San Diego
 
 - Class04 [Introduction to R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%204/class4jan16th.html) 
