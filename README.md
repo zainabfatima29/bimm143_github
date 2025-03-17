@@ -22,7 +22,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 14 [Mini project: RNA-Seq Data Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2014/Class%2014%20Lab.html)
 
-- Class 16 [UNIX for Bioinformatics](HW8_unix_questions (1).pdf)
+- Class 16 [UNIX for Bioinformatics](Class 16/HW8_unix_questions (1).pdf)
 
 - Class 17 [Analyzing Sequencing Data on the Cloud](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2017/class17.html)
 
