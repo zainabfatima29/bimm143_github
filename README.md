@@ -14,7 +14,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 09 [Mini-Project: Unsupervised clustering and Principal Component Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%209%20(miniproject)/class%209%20miniproject.html)
 
-- Class 10 [Structural Bioinformatics Part 1: AlphaFold and Protein Structure, Visualization, and Dynamics]()
+- Class 10 [Structural Bioinformatics Part 1: AlphaFold and Protein Structure, Visualization, and Dynamics](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2010/class10.html)
 
 - Class 11 [Structural Bioinformatics Part 2: AlphaFold2 and Protein Structure Prediction]()
 
