@@ -4,7 +4,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class04 [Introduction to R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%204/class4jan16th.html) 
 
-- Class 05 [Data Visualization with ggplot](class05.pdf)
+- Class 05 [Data Visualization with ggplot](Class 5/class05.pdf)
 
 - Class 06 [Rfunctions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%206/Class06.html)
 
@@ -14,7 +14,7 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 09 [Mini-Project: Unsupervised clustering and Principal Component Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%209%20(miniproject)/class%209%20miniproject.html)
 
-- Class 10 [Structural Bioinformatics Part 1: AlphaFold and Protein Structure, Visualization, and Dynamics](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2010/class10.html)
+- Class 10 [Structural Bioinformatics Part 1: AlphaFold and Protein Structure, Visualization, and Dynamics](Class 10/class10.pdf)
 
 - Class 11 [Structural Bioinformatics Part 2: AlphaFold2 and Protein Structure Prediction](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2011/class11.html)
 
@@ -28,4 +28,4 @@ My past classwork from Winter 2025 [BIMM 143](https://bioboot.github.io/bimm143_
 
 - Class 18 [Mini Project: Web-scraping, JSON based APIs, Longitudingal RNA-Seq Analysis](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zainabfatima29/bimm143_github/refs/heads/main/Class%2018/Class18miniproj.html)
 
-- Class 19 [Mini-project: Cancer Mutation Analysis from Next-Gen Sequencing Data](lab19.pdf)
+- Class 19 [Mini-project: Cancer Mutation Analysis from Next-Gen Sequencing Data](Class 19/lab19.pdf)
