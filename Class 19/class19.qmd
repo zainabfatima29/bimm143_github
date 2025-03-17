@@ -1,0 +1,46 @@
+---
+title: "Lab 19"
+author: "Zainab Fatima"
+format: html
+---
+
+```{r}
+library(bio3d)
+```
+
+
+```{r}
+s <- read.fasta("A16880407_mutant_seq.fa")
+s
+```
+
+# Score conservation per position
+
+```{r}
+score <- conserv(s)
+```
+
+The sites where amino acids/residues differ are the cancer mutations.
+
+```{r}
+positions <- which(score != 1)
+```
+
+```{r}
+s$ali[,positions]
+```
+```{r}
+residues <- s$ali[,positions]
+```
+
+```{r}
+paste(residues[,1], positions, residues[,2], sep = "")
+```
+Read in AlphaFold3 CIF model and export a PDB model for FTMap
+
+```{r, warning = FALSE}
+cif.file <- "fold_2025_03_11_10_48_model_1.cif"
+x <- read.cif(cif.file)
+write.pdb(x, file = "AF_model.pdb")
+```
+
